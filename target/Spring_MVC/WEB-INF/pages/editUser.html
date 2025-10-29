@@ -2,15 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактировать пользователя</title>
+    <title>Edit user</title>
 </head>
 <body>
-<form th:action="@{/users}" method="post">
-    <input type="hidden" name="id" th:value="${user.id}">
-    <label>Имя:</label><input type="text" name="firstName" th:value="${user.firstName}"><br>
-    <label>Фамилия:</label><input type="text" name="lastName" th:value="${user.lastName}"><br>
-    <button type="submit">Сохранить</button>
+<form th:action="@{/editUser}" method="post">
+    <input type="hidden" name="id" th:value="${user.getId()}">
+    <label>Name:</label><input type="text" name="firstName" th:value="${user.getName()}"><br>
+    <label>Surname:</label><input type="text" name="lastName" th:value="${user.getSurname()}"><br>
+    <button type="submit">Save</button>
 </form>
-<a href="/users">Вернуться к списку</a>
 </body>
 </html>

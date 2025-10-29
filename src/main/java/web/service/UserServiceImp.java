@@ -26,9 +26,16 @@ public class UserServiceImp implements UserService {
         userDao.delete(id);
     }
 
+    @Transactional
     @Override
-    public void update(int id, User user) {
-        userDao.update(id, user);
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public User getUser(int id) {
+        return userDao.getUser(id);
     }
 
     @Transactional(readOnly = true)
@@ -36,6 +43,4 @@ public class UserServiceImp implements UserService {
     public List<User> listUsers() {
         return userDao.listUsers();
     }
-
-
 }

@@ -11,6 +11,7 @@ import web.service.UserService;
 
 import java.util.List;
 
+//набор endpoints
 @Controller
 public class UsersController {
 
@@ -29,7 +30,7 @@ public class UsersController {
         return "addUser";
     }
 
-    @PostMapping("/users")
+    @PostMapping("/addUser")
     public String addUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         User user = new User();
         user.setName(firstName);
@@ -38,23 +39,29 @@ public class UsersController {
         return "redirect:/users";
     }
 
-//    @GetMapping("/editUser")
-//    public String showEditForm(int id, ModelMap model) {
-//        User user = userService.getUserById(id);
-//        model.addAttribute("user", user);
-//        return "editUser";
-//    }
-//
-//    @PostMapping("/users")
-//    public String updateUser( User user) {
-//        userService.update(user.getId(), user);
-//        return "redirect:/users";
-//    }
+    @GetMapping("/editUser")
+    public String showEditForm(@RequestParam("id") int id, ModelMap model) {
+        User user = userService.getUser(id);
+        model.addAttribute("user", user);
+        return "editUser";
+    }
+
+    @PostMapping("/editUser")
+    public String editUser(@RequestParam("id") int id,
+                           @RequestParam("firstName") String firstName,
+                           @RequestParam("lastName") String lastName) {
+        User user = new User();
+        user.setId(id);
+        user.setName(firstName);
+        user.setSurname(lastName);
+        userService.update(user);
+        return "redirect:/users";
+    }
 
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") int userId) {
         userService.delete(userId);
-        return "redirect:/users"; // Перенаправление на страницу с списком пользователей
+        return "redirect:/users";
     }
 
 }
